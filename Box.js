@@ -46,7 +46,7 @@ export class Box {
 
     this.text.style.fill = this.value > 4 ? 0xf9f6f2 : 0x776e65
     if (this.text.width > this.width) {
-      this.text.scale.set(this.width / this.text.width)
+      this.text.width = 100
     }
   }
 
@@ -58,12 +58,10 @@ export class Box {
   }
 
   scaleAnimation = () => {
-    console.log(PIXI)
-    let ticker = PIXI.Ticker.shared
+     let ticker = PIXI.Ticker.shared
 
     ticker.add(() => {
-      console.log('da')
-      TWEEN.update()
+       TWEEN.update()
     })
 
     ticker.start()

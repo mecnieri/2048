@@ -48,7 +48,7 @@ export class Board {
       this.boxes[randomTiles[i]] = new Box(
         this,
         randomTiles[i],
-        Math.random() < 0.8 ? 2 : 4,
+        Math.random() < 0.9 ? 2 : 4,
       )
     }
     if (this.checkGameOver()) {
@@ -113,7 +113,7 @@ export class Board {
       })
     })
     setTimeout(() => {
-      this.addRandomBoxes(Math.random() < 0.8 ? 1 : 2)
+      this.addRandomBoxes(Math.random() < 0.9 ? 1 : 2)
     }, 100)
   }
   moverRight(n) {
@@ -147,7 +147,7 @@ export class Board {
       })
     })
     setTimeout(() => {
-      this.addRandomBoxes(Math.random() < 0.8 ? 1 : 2)
+      this.addRandomBoxes(Math.random() < 0.9 ? 1 : 2)
     }, 100)
   }
   moveUp(n) {
@@ -183,7 +183,7 @@ export class Board {
       })
     })
     setTimeout(() => {
-      this.addRandomBoxes(Math.random() < 0.8 ? 1 : 2)
+      this.addRandomBoxes(Math.random() < 0.9 ? 1 : 2)
     }, 100)
   }
 
@@ -220,7 +220,7 @@ export class Board {
       })
     })
     setTimeout(() => {
-      this.addRandomBoxes(Math.random() < 0.8 ? 1 : 2)
+      this.addRandomBoxes(Math.random() < 0.9 ? 1 : 2)
     }, 100)
   }
 
@@ -241,19 +241,13 @@ export class Board {
     })
 
     window.addEventListener('touchstart', e => {
-      console.log('touchstart')
-
-      // prevent page reload
-      // e.preventDefault()
-
+ 
+ 
       // Cache the client X/Y coordinates
       this.clientX = e.touches[0].clientX
-      console.log(e.touches[0].clientX)
-      this.clientY = e.touches[0].clientY
+       this.clientY = e.touches[0].clientY
 
-      setTimeout(() => {
-        console.log(e.touches[0].clientX)
-      }, 300)
+     
     })
     // window.addEventListener('touchend', e => {
     //   console.log('touchend')
@@ -293,10 +287,8 @@ export class Board {
           // list is the touch point that was just removed from the surface.
           let deltaX = e.changedTouches[i].clientX - this.clientX
           let deltaY = e.changedTouches[i].clientY - this.clientY
-          console.log(deltaX, deltaY)
-          if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            console.log(deltaX, deltaY)
-            if (deltaX > 0) {
+           if (Math.abs(deltaX) > Math.abs(deltaY)) {
+             if (deltaX > 0) {
               this.moverRight()
             } else {
               this.moveLeft()
@@ -310,7 +302,6 @@ export class Board {
           }
         }
       }
-      console.log(this.count)
     })
   }
 }
