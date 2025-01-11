@@ -13,5 +13,6 @@ class Game {
   constructor(app) {
     this.board = new Board()
     app.stage.addChild(this.board.container)
+    app.stage.addChild(this.board.boxesContainer)
   }
 }

@@ -11,6 +11,7 @@ export class Board {
     this.graphics.endFill()
 
     this.container = new PIXI.Container()
+    this.container.name = "Tiles Container"
     this.container.x = 10
     this.container.y = 10
     this.container.addChild(this.graphics)
@@ -21,6 +22,11 @@ export class Board {
       }
     }
     this.boxesContainer = new PIXI.Container()
+    this.boxesContainer.x = 10
+    this.boxesContainer.y = 10
+
+    this.boxesContainer.name = "Boxes Container"
+
     this.boxes = new Array(16).fill(null, 0, 16)
     this.addRandomBoxes(4)
     this.container.addChild(this.boxesContainer)
@@ -71,7 +77,7 @@ export class Board {
           sorted[i].value === sorted[i + 1].value
         ) {
           sorted[i].double()
-          this.container.removeChild(sorted[i + 1].container)
+          this.boxesContainer.removeChild(sorted[i + 1].container)
           sorted[i + 1] = null
         }
       }
@@ -104,7 +110,7 @@ export class Board {
           sorted[i].value === sorted[i + 1].value
         ) {
           sorted[i].double()
-          this.container.removeChild(sorted[i + 1].container)
+          this.boxesContainer.removeChild(sorted[i + 1].container)
           sorted[i + 1] = null
         }
       }
@@ -138,7 +144,7 @@ export class Board {
           sorted[i].value === sorted[i + 1].value
         ) {
           sorted[i].double()
-          this.container.removeChild(sorted[i + 1].container)
+          this.boxesContainer.removeChild(sorted[i + 1].container)
           sorted[i + 1] = null
         }
       }
@@ -173,7 +179,7 @@ export class Board {
           sorted[i].value === sorted[i + 1].value
         ) {
           sorted[i].double()
-          this.container.removeChild(sorted[i + 1].container)
+          this.boxesContainer.removeChild(sorted[i + 1].container)
           sorted[i + 1] = null
         }
       }

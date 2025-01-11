@@ -1,3 +1,5 @@
+import TWEEN from 'https://cdn.jsdelivr.net/npm/@tweenjs/tween.js@18.5.0/dist/tween.esm.js'
+
 export class Box {
   constructor(board, i, value) {
     this.value = value
@@ -12,8 +14,16 @@ export class Box {
     this.graphics.pivot.set(0.5)
 
     this.container = new PIXI.Container()
+
+    // let renderer = PIXI.autoDetectRenderer()
+    // let texture = renderer.generateTexture(this.graphics)
+    // console.log(texture)
+
+    // this.sprite = new PIXI.Sprite(texture)
+
+    // console.log(this.sprite)
     this.container.addChild(this.graphics)
-    board.container.addChild(this.container)
+    board.boxesContainer.addChild(this.container)
 
     this.text = new PIXI.Text(this.value, {
       fontSize: 50,
@@ -38,6 +48,18 @@ export class Box {
       1024: 0xedc53f,
       2048: 0xedc22e,
     }
+    this.updateScale.bind(this)
+    this.scaleAnimation.bind(this)
+    this.startingScale = {
+      animScaleX: 1,
+      animScaleY: 1,
+    }
+
+    this.endingScaleUp = {
+      animScaleX: 2,
+      animScaleY: 2,
+    }
+    // this.scaleAnimation()
   }
   double() {
     this.value *= 2
@@ -51,26 +73,17 @@ export class Box {
     this.graphics.drawRoundedRect(0, 0, this.width, this.height, 10)
     this.graphics.endFill()
 
-    // this.scaleAnimation()
 
   }
 
-  scaleAnimation() {
+  updateScale = () => {
+    console.log(this)
+    console.log('first')
+    this.container.scale.set(this.startingScale.animScaleX, this.startingScale.animScaleY)
+  }
 
-    let startingScale = {
-      animScaleX: 1,
-      animScaleY: 1,
-    }
+  scaleAnimation = () => {
 
-    let endingScaleUp = {
-      animScaleX: 2,
-      animScaleY: 2,
-    }
-
-    function updateScale() {
-      console.log('first')
-      this.container.scale.set(startingScale.animScaleX, startingScale.animScaleY)
-    }
     console.log(PIXI)
     let ticker = PIXI.Ticker.shared
 
@@ -80,11 +93,13 @@ export class Box {
     })
 
     ticker.start()
-
-    new TWEEN.Tween(startingScale)
-      .to(endingScaleUp, 1000)
+    console.log(this)
+    console.log(this.startingScale)
+    console.log(this.endingScaleUp)
+    new TWEEN.Tween(this.startingScale)
+      .to(this.endingScaleUp, 1000)
       .easing(TWEEN.Easing.Quadratic.In)
-      .onUpdate(updateScale)
+      .onUpdate(this.updateScale)
       .start()
       .onComplete(() => {
         console.log('done')
