@@ -32,6 +32,7 @@ export class Board {
     this.addRandomBoxes(4)
     this.container.addChild(this.boxesContainer)
     this.addEventListeners()
+    this.count = 0
   }
 
   addRandomBoxes(n) {
@@ -243,40 +244,73 @@ export class Board {
       console.log('touchstart')
 
       // prevent page reload
-      e.preventDefault()
+      // e.preventDefault()
 
       // Cache the client X/Y coordinates
       this.clientX = e.touches[0].clientX
+      console.log(e.touches[0].clientX)
       this.clientY = e.touches[0].clientY
+
+      setTimeout(() => {
+        console.log(e.touches[0].clientX)
+      }, 300)
     })
-    window.addEventListener('touchend', e => {
-      console.log('touchend')
-      for (let i = 0; i < e.changedTouches.length; i++) {
-        // Compute the change in X and Y coordinates.
-        // The first touch point in the changedTouches
-        // list is the touch point that was just removed from the surface.
-        let deltaX = e.changedTouches[i].clientX - this.clientX
-        let deltaY = e.changedTouches[i].clientY - this.clientY
-        console.log(deltaX, deltaY)
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    // window.addEventListener('touchend', e => {
+    //   console.log('touchend')
+    //   for (let i = 0; i < e.changedTouches.length; i++) {
+    //     // Compute the change in X and Y coordinates.
+    //     // The first touch point in the changedTouches
+    //     // list is the touch point that was just removed from the surface.
+    //     let deltaX = e.changedTouches[i].clientX - this.clientX
+    //     let deltaY = e.changedTouches[i].clientY - this.clientY
+    //     console.log(deltaX, deltaY)
+    //     if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    //       console.log(deltaX, deltaY)
+    //       if (deltaX > 0) {
+    //         this.moverRight()
+    //       } else {
+    //         this.moveLeft()
+    //       }
+    //     } else {
+    //       if (deltaY > 0) {
+    //         this.moveDown()
+    //       } else {
+    //         this.moveUp()
+    //       }
+    //     }
+    //   }
+    // })
+    document.addEventListener('touchend', () => {
+      this.count = 0
+    })
+    document.addEventListener('touchmove', e => {
+      // e.preventDefault()
+      this.count++
+      if (this.count === 4) {
+        for (let i = 0; i < e.changedTouches.length; i++) {
+          // Compute the change in X and Y coordinates.
+          // The first touch point in the changedTouches
+          // list is the touch point that was just removed from the surface.
+          let deltaX = e.changedTouches[i].clientX - this.clientX
+          let deltaY = e.changedTouches[i].clientY - this.clientY
           console.log(deltaX, deltaY)
-          if (deltaX > 0) {
-            this.moverRight()
+          if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            console.log(deltaX, deltaY)
+            if (deltaX > 0) {
+              this.moverRight()
+            } else {
+              this.moveLeft()
+            }
           } else {
-            this.moveLeft()
-          }
-        } else {
-          if (deltaY > 0) {
-            this.moveDown()
-          } else {
-            this.moveUp()
+            if (deltaY > 0) {
+              this.moveDown()
+            } else {
+              this.moveUp()
+            }
           }
         }
       }
+      console.log(this.count)
     })
   }
 }
-
-document.addEventListener('touchmove', e => {
-  e.preventDefault()
-})
