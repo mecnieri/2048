@@ -12,3 +12,8 @@ a {
   font-family: 'rubic';
   src: url('./assets/Rubic.woff2');
 }
+
+#root {
+  display: flex;
+  justify-content: center;
+}
