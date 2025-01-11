@@ -2,7 +2,8 @@ import { Box } from './Box.js'
 import { Tile } from './setup.js'
 
 export class Board {
-  constructor() {
+  constructor(app) {
+    this.textures = app.textures
     this.width = 4
     this.height = 4
     this.graphics = new PIXI.Graphics()
@@ -11,7 +12,7 @@ export class Board {
     this.graphics.endFill()
 
     this.container = new PIXI.Container()
-    this.container.name = "Tiles Container"
+    this.container.name = 'Tiles Container'
     this.container.x = 10
     this.container.y = 10
     this.container.addChild(this.graphics)
@@ -25,7 +26,7 @@ export class Board {
     this.boxesContainer.x = 10
     this.boxesContainer.y = 10
 
-    this.boxesContainer.name = "Boxes Container"
+    this.boxesContainer.name = 'Boxes Container'
 
     this.boxes = new Array(16).fill(null, 0, 16)
     this.addRandomBoxes(4)
