@@ -5,8 +5,7 @@ export class Box {
     this.height = 100
     this.graphics = new PIXI.Graphics()
     this.graphics.x = 10 + (i % 4) * this.width + 10 * (i % 4)
-    this.graphics.y =
-      10 + Math.floor(i / 4) * this.height + 10 * Math.floor(i / 4)
+    this.graphics.y = 10 + Math.floor(i / 4) * this.height + 10 * Math.floor(i / 4)
     this.graphics.beginFill(0xefe4da)
     this.graphics.drawRoundedRect(0, 0, this.width, this.height, 10)
     this.graphics.endFill()
@@ -52,48 +51,47 @@ export class Box {
     this.graphics.drawRoundedRect(0, 0, this.width, this.height, 10)
     this.graphics.endFill()
 
-    // gsap
-    //   .timeline()
-    //   .to(this.graphics.scale, {
-    //     x: 0.9,
-    //     duration: 0.05,
-    //     ease: 'power1.inOut',
-    //   })
-    //   .to(this.graphics.scale, {
-    //     x: 1.1,
-    //     duration: 0.05,
-    //     ease: 'power1.inOut',
-    //   })
-    //   .to(this.graphics.scale, {
-    //     x: 1.0,
-    //     duration: 0.05,
-    //     ease: 'power1.inOut',
-    //   })
-    // gsap
-    //   .timeline()
-    //   .to(this.graphics.scale, {
-    //     y: 0.9,
-    //     duration: 0.05,
-    //     ease: 'power1.inOut',
-    //   })
-    //   .to(this.graphics.scale, {
-    //     y: 1.1,
-    //     duration: 0.05,
-    //     ease: 'power1.inOut',
-    //   })
-    //   .to(this.graphics.scale, {
-    //     y: 1.0,
-    //     duration: 0.05,
-    //     ease: 'power1.inOut',
-    //   })
-    // gsap.to(this.graphics, {
-    //   pixi: { scaleX: 1.2, scaleY: 1.2 },
-    //   duration: 0.1,
-    // })
-    console.log(TweenMax)
-    TweenMax.to(this.container, 0.4, { scale: 1.5, ease: Bounce.easeOut })
-    TweenMax.to(this.container, 0.2, { scale: 1, delay: 0.4 })
+    // this.scaleAnimation()
+
   }
+
+  scaleAnimation() {
+
+    let startingScale = {
+      animScaleX: 1,
+      animScaleY: 1,
+    }
+
+    let endingScaleUp = {
+      animScaleX: 2,
+      animScaleY: 2,
+    }
+
+    function updateScale() {
+      console.log('first')
+      this.container.scale.set(startingScale.animScaleX, startingScale.animScaleY)
+    }
+    console.log(PIXI)
+    let ticker = PIXI.Ticker.shared
+
+    ticker.add(() => {
+      console.log('da')
+      TWEEN.update()
+    })
+
+    ticker.start()
+
+    new TWEEN.Tween(startingScale)
+      .to(endingScaleUp, 1000)
+      .easing(TWEEN.Easing.Quadratic.In)
+      .onUpdate(updateScale)
+      .start()
+      .onComplete(() => {
+        console.log('done')
+        ticker.stop()
+      })
+  }
+
   moveLeft(n) {
     gsap.to(this.graphics, {
       x: 10 + (n % 4) * this.width + 10 * (n % 4),
