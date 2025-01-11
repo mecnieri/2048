@@ -36,7 +36,6 @@ export class Board {
 
   addRandomBoxes(n) {
     const freeTiles = this.getFreeTiles()
-    if (freeTiles.length === 0) return alert('Game Over')
     if (freeTiles.length < n) n = freeTiles.length
     const randomTiles = []
     for (let i = 0; i < n; i++) {
@@ -51,6 +50,26 @@ export class Board {
         Math.random() < 0.8 ? 2 : 4,
       )
     }
+    if (this.checkGameOver()) {
+      setTimeout(() => {
+        alert('Game Over')
+      }, 100)
+      return
+    }
+  }
+  checkGameOver() {
+    for (let i = 0; i < this.boxes.length; i++) {
+      if (this.boxes[i] === null) return false
+    }
+    for (let i = 0; i < this.boxes.length; i++) {
+      if (i % 4 !== 3 && this.boxes[i].value === this.boxes[i + 1].value) {
+        return false
+      }
+      if (i < 12 && this.boxes[i].value === this.boxes[i + 4].value) {
+        return false
+      }
+    }
+    return true
   }
   getFreeTiles() {
     const freeTiles = []
@@ -114,7 +133,6 @@ export class Board {
           sorted[i].double()
           sorted[i + 1].moverRight(arr[i], true)
 
-          // this.boxesContainer.removeChild(sorted[i + 1].container)
           sorted[i + 1] = null
         }
       }
