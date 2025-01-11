@@ -78,10 +78,11 @@ export class Board {
           sorted[i].value === sorted[i + 1].value
         ) {
           sorted[i].double()
-          this.boxesContainer.removeChild(sorted[i + 1].container)
+          sorted[i + 1].moveLeft(arr[i], true)
           sorted[i + 1] = null
         }
       }
+
       sorted.sort().forEach((item, index) => {
         if (item === null) {
           this.boxes[arr[index]] = null
@@ -111,7 +112,9 @@ export class Board {
           sorted[i].value === sorted[i + 1].value
         ) {
           sorted[i].double()
-          this.boxesContainer.removeChild(sorted[i + 1].container)
+          sorted[i + 1].moverRight(arr[i], true)
+
+          // this.boxesContainer.removeChild(sorted[i + 1].container)
           sorted[i + 1] = null
         }
       }
@@ -145,7 +148,9 @@ export class Board {
           sorted[i].value === sorted[i + 1].value
         ) {
           sorted[i].double()
-          this.boxesContainer.removeChild(sorted[i + 1].container)
+          sorted[i + 1].moveUp(arr[i], true)
+
+          // this.boxesContainer.removeChild(sorted[i + 1].container)
           sorted[i + 1] = null
         }
       }
@@ -180,7 +185,9 @@ export class Board {
           sorted[i].value === sorted[i + 1].value
         ) {
           sorted[i].double()
-          this.boxesContainer.removeChild(sorted[i + 1].container)
+          sorted[i + 1].moveDown(arr[i], true)
+
+          // this.boxesContainer.removeChild(sorted[i + 1].container)
           sorted[i + 1] = null
         }
       }

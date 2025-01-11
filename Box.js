@@ -9,7 +9,6 @@ export class Box {
 
     this.container = new PIXI.Container()
     this.sprite = new PIXI.Sprite(this.board.textures[this.value])
-    console.log(this.sprite)
     this.sprite.x = 10 + (i % 4) * this.width + 10 * (i % 4)
     this.sprite.y =
       10 + Math.floor(i / 4) * this.height + 10 * Math.floor(i / 4)
@@ -39,7 +38,6 @@ export class Box {
       animScaleX: 2,
       animScaleY: 2,
     }
-    // this.scaleAnimation()
   }
   double() {
     this.value *= 2
@@ -83,32 +81,64 @@ export class Box {
       })
   }
 
-  moveLeft(n) {
-    gsap.to(this.sprite, {
-      x: 10 + (n % 4) * this.width + 10 * (n % 4),
-      duration: 0.1,
-      ease: 'power1.inOut',
-    })
+  moveLeft(n, deleted) {
+    gsap
+      .timeline({
+        onComplete: () => {
+          if (deleted) {
+            this.board.boxesContainer.removeChild(this.container)
+          }
+        },
+      })
+      .to(this.sprite, {
+        x: 10 + (n % 4) * this.width + 10 * (n % 4),
+        duration: 0.1,
+        ease: 'power1.inOut',
+      })
   }
-  moverRight(n) {
-    gsap.to(this.sprite, {
-      x: 10 + (n % 4) * this.width + 10 * (n % 4),
-      duration: 0.1,
-      ease: 'power1.inOut',
-    })
+  moverRight(n, deleted) {
+    gsap
+      .timeline({
+        onComplete: () => {
+          if (deleted) {
+            this.board.boxesContainer.removeChild(this.container)
+          }
+        },
+      })
+      .to(this.sprite, {
+        x: 10 + (n % 4) * this.width + 10 * (n % 4),
+        duration: 0.1,
+        ease: 'power1.inOut',
+      })
   }
-  moveUp(n) {
-    gsap.to(this.sprite, {
-      y: 10 + Math.floor(n / 4) * this.height + 10 * Math.floor(n / 4),
-      duration: 0.1,
-      ease: 'power1.inOut',
-    })
+  moveUp(n, deleted) {
+    gsap
+      .timeline({
+        onComplete: () => {
+          if (deleted) {
+            this.board.boxesContainer.removeChild(this.container)
+          }
+        },
+      })
+      .to(this.sprite, {
+        y: 10 + Math.floor(n / 4) * this.height + 10 * Math.floor(n / 4),
+        duration: 0.1,
+        ease: 'power1.inOut',
+      })
   }
-  moveDown(n) {
-    gsap.to(this.sprite, {
-      y: 10 + Math.floor(n / 4) * this.height + 10 * Math.floor(n / 4),
-      duration: 0.1,
-      ease: 'power1.inOut',
-    })
+  moveDown(n, deleted) {
+    gsap
+      .timeline({
+        onComplete: () => {
+          if (deleted) {
+            this.board.boxesContainer.removeChild(this.container)
+          }
+        },
+      })
+      .to(this.sprite, {
+        y: 10 + Math.floor(n / 4) * this.height + 10 * Math.floor(n / 4),
+        duration: 0.1,
+        ease: 'power1.inOut',
+      })
   }
 }
