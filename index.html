@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TITLE</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://cdn.jsdelivr.net/npm/twemoji@11.3.0/2/svg/1f60e.svg"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <a href="../../index.html">Back</a>
+    <div id="root"></div>
+
+    <script type="module" src="./main.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/PixiPlugin.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.js"
+      integrity="sha512-a5U0Pz9DDuV1x+WqNnbUPNJsbzhAdHZtzLrYHHxEm2Ol7wBMzCoizd/arbJd1wqMpwlzXTlBYm+zX/mtVdiz2w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      // use a script tag or an external JS file
+      document.addEventListener('DOMContentLoaded', event => {
+        gsap.registerPlugin(PixiPlugin)
+        // gsap code here!
+      })
+    </script>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
